@@ -95,11 +95,9 @@ def main(argv):
                     row.append(item[i][codon]/numReads)
                 writer.writerow(row)
 
-    
-
     #read tsv file into a data frame
     import pandas as pd
-    df = pd.read_csv("freq.tsv", delimiter = '\t')
+    df = pd.read_csv(outFile, delimiter = '\t')
 
     #calculate A 
     import math
@@ -145,7 +143,7 @@ def main(argv):
     for i in range(0,length):
         ax.add_patch(Rectangle((i, list(mat.index).index(wt_seq[i])), 1, 1, fill=False, edgecolor='blue', lw=3))
     ax.set_title("Fitness Effect")
-    plt.savefig("heatmap.png", bbox_inches='tight')
+    plt.savefig("heatmap.pdf", bbox_inches='tight')
 
 
 

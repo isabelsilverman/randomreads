@@ -1,4 +1,6 @@
-table = read.table(file = 'freq.tsv', sep = '\t', header = TRUE)
+args = commandArgs(trailingOnly=TRUE)
+
+table = read.table(file = args[1], sep = '\t', header = TRUE)
 
 codons = table$Codon
 table = table[-c(1,2,3)]
@@ -13,10 +15,10 @@ for(i in 1:length(p_reps)) {
     p_reps[i] = p_reps[i] + table[i,j]}
   p_reps[i] = p_reps[i]/(ncol-2)}
 
-png("freq_barplots.png")
+pdf("freq_barplots.pdf")
 par( mfrow=c(1, 3))
 for(i in c(1,2)) {
-  barplot(unlist(table[i]), names.arg = codons, main = colnames[i], 
+  barplot(unlist(table[i]), names.arg = codons, main = colnames(table)[i], 
           xlab = "Codon", ylab = "Frequency", ylim = c(0,0.02))
 }
 barplot(p_reps, names.arg = codons, main = "p_reps.Frequency", 
